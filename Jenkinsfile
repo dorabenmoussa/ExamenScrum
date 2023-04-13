@@ -2,9 +2,14 @@ pipeline {
     agent any
     
     stages {
-        stage('Testing maven') {
+        stage('Checkout') {
             steps {
-                sh 'mvn --version'
+                git branch: 'main', url: 'https://github.com/dorabenmoussa/ExamenScrum.git'
+            }
+        }
+        stage('Display Date') {
+            steps {
+                sh 'date'
             }
         }
     }
