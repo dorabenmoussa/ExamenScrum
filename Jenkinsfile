@@ -16,8 +16,14 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
+                
                 sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=root"
 
+            }
+        }
+        stage('Nexus Publish') {
+            steps {
+                nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: 'target/*.jar']], mavenCoords: [artifactId: 'my-app', groupId: 'com.example', version: '1.0']]]
             }
         }
         stage('Display Date') {
