@@ -16,8 +16,8 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                
-                sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=root"
+                def project_key = "ExamenScrum"
+                sh "mvn sonar:sonar -Dsonar.projectKey=${project_key} -Dsonar.host.url=http://172.172.10.10:9000/ -Dsonar.login=admin -Dsonar.password=root"
 
             }
         }
