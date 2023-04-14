@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        M2_HOME = "/opt/maven" // Replace this with the actual path to your Maven installation
+        PATH = "${env.M2_HOME}/bin:${env.PATH}"
+    }
     stages {
         stage('Checkout') {
             steps {
